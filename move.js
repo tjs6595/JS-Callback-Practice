@@ -15,16 +15,16 @@ function move(element) {
         element.style.bottom = y + 'px'
         
         function moveCharacter(){ 
-            if(direction === 'west'){
+            if(direction === 'west' && x > 0){
                 x-=1
             }
-            if(direction === 'north'){
+            if(direction === 'north' && y < window.innerHeight){
                 y+=1
             }
-            if(direction === 'east'){
+            if(direction === 'east' && x < window.innerWidth){
                 x+=1
             }
-            if(direction === 'south'){
+            if(direction === 'south' && y > 0){
                 y-=1
             }
             element.style.left = x + 'px'
@@ -48,12 +48,16 @@ function move(element) {
             if(e.key === 'ArrowDown'){
                 direction = 'south'
             }
-            callback(direction)
+            if (callback != null){
+                callback(direction)                
+            }
         })
         
         document.addEventListener('keyup', function(e){
             direction = null
-            callback(direction)
+            if (callback != null){
+                callback(direction)                
+            }
         })
     }
 
